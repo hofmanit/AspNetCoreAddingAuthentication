@@ -23,7 +23,7 @@ namespace WishList.Controllers
 
         }
 
-        [HttpPost]
+        [HttpGet]
         [AllowAnonymous]
         public IActionResult Register()
         {

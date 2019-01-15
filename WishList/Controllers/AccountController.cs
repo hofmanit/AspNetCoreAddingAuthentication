@@ -36,15 +36,16 @@ namespace WishList.Controllers
         {
             if (!ModelState.IsValid)
                return View(model);
-            var result = _userManager.CreateAsync(new ApplicationUser() { Email = model.Email, UserName = model.Email }, model.Password);
+            var userResult = _userManager.CreateAsync(new ApplicationUser() { Email = model.Email, UserName = model.Email }, model.Password);
 
-            if (!result.Result.Succeeded)
+            if (!userResult.Result.Succeeded)
             {
-                foreach (var error in result.Result.Errors)
+                ModelState.AddModelError("Password", "Not valid login");
+                foreach (var error in userResult.Result.Errors)
                 {
-                    ModelState.AddModelError("Password", "Not valid login");
-                    return View(model);
+                    ModelState.AddModelError(String.Empty, error.Description);
                 }
+                return View(model);
             }
 
             return RedirectToAction("Index", "Home");

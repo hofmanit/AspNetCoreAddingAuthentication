@@ -1,12 +1,11 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace WishList.Models
 {
     public class Item
     {
-        public int Id { get; set; }
+        public int Id { get; set; }  // It was int ???
 
         [Required]
         [MaxLength(50)]

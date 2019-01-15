@@ -12,7 +12,7 @@ namespace WishList.Models
         [MaxLength(50)]
         public string Description { get; set; }
 
-        public virtual ICollection<Item> Items { get; set; }
+        public virtual ApplicationUser User { get; set; }
 
 
     }

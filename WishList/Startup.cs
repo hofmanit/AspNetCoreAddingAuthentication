@@ -2,7 +2,9 @@
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
-using WishList.Data;
+using WishList.Data
+using Microsoft.AspNetCore.Identity;
+using WishList.Models;
 
 namespace WishList
 {
@@ -13,7 +15,9 @@ namespace WishList
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc();
-            services.AddDbContext<ApplicationDbContext>(options => options.UseInMemoryDatabase("Wishlist"));
+            services.AddDbContext<ApplicationDbContext>(options => options.UseInMemoryDatabase("Wishlist
+            
+            services.AddIdentity<ApplicationUser, IdentityRole>().AddEntityFrameworkStores<ApplicationDbContext>().AddDefaultTokenProviders();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -28,6 +32,7 @@ namespace WishList
                 app.UseExceptionHandler("/Home/Error");
             }
 
+            app.UseAuthentication();
             app.UseMvcWithDefaultRoute();
         }
     }
